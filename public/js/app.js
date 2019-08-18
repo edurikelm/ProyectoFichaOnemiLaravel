@@ -1,0 +1,6 @@
+
+
+$().ready(()=>{
+
+    $("#login").validate()
+});
