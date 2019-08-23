@@ -5,7 +5,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/alumnos/create" class="btn btn-success btn-sm">Nuevo Alumno</a>
-            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de Alumnos</h4>
+            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de Alumnos :)</h4>
         </div>
         <div class="card-body">
             <div class="table-responsive">
