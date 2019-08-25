@@ -21,3 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/alumnos', 'AlumnoController');
 
+Route::get('/alumnos/editar/{id}', 'AlumnoController@edit')->name('alumnos.editar');
+
+Route::put('/alumnos/editar/{id}', 'AlumnoController@update')->name('alumnos.update');
+
+Route::delete('/alumnos/eliminar/{id}', 'AlumnoController@destroy')->name('alumnos.eliminar');
+

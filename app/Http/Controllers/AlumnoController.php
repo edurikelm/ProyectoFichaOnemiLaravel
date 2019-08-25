@@ -86,7 +86,8 @@ class AlumnoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $alumno = Alumno::findOrFail($id);
+        return view('pages.alumnos.editar', compact('alumno'));
     }
 
     /**
@@ -98,7 +99,27 @@ class AlumnoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $alumnoUpdate = Alumno::find($id);
+        $alumnoUpdate->nombres = $request->nombres;
+        $alumnoUpdate->apellidos = $request->apellidos;
+        $alumnoUpdate->rut = $request->rut;
+        $alumnoUpdate->direccion= $request->direccion;
+        $alumnoUpdate->fecha_nacimiento= $request->fecha_nacimiento;
+        $alumnoUpdate->telefono= $request->telefono;
+        $alumnoUpdate->curso= $request->curso;
+        $alumnoUpdate->salud= $request->salud;
+        $alumnoUpdate->vive= $request->vive;
+        $alumnoUpdate->apodrado1= $request->apodrado1;
+        $alumnoUpdate->apodrado2= $request->apodrado2;
+        $alumnoUpdate->pie= $request->pie;
+        $alumnoUpdate->social= $request->social;
+        $alumnoUpdate->tipo= $request->tipo;
+        $alumnoUpdate->repitencia= $request->repitencia;
+        $alumnoUpdate->diagnostico= $request->diagnostico;
+
+        $alumnoUpdate->save();
+
+        return back()->with('mensaje', 'Alumno editado con exito.');
     }
 
     /**
@@ -109,6 +130,9 @@ class AlumnoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $alumnoEliminar = Alumno::findOrFail($id);
+        $alumnoEliminar->delete();
+
+        return back()->with('mensaje', 'Alumno eliminado con exito.');
     }
 }

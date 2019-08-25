@@ -5,9 +5,16 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <a href="/alumnos/create" class="btn btn-success btn-sm">Nuevo Alumno</a>
-            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de Alumnos :)</h4>
+            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de Alumnos</h4>
         </div>
         <div class="card-body">
+            @if ( session('mensaje') )
+            <div class="alert alert-danger">{{ session('mensaje') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-light">
@@ -44,7 +51,7 @@
                             </th>
                             <th>
                                 <a href="" class="btn btn-sm btn-info">Ver</a>
-                                <a href="" class="btn btn-sm btn-warning">Editar</a>
+                                <a href="{{route('alumnos.editar', $item)}}" class="btn btn-sm btn-warning">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger" data-toggle="modal"
                                     data-target="#myModal">Eliminar</a>
                             </th>
@@ -68,7 +75,9 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="../procesos/eliminarAlumno.php" method="POST">
+                                            <form action="{{route('alumnos.eliminar', $item)}}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
                                                 <input type="hidden" name="id" value="">
                                                 <button type="submit" name="btn_borrar_alumno"
                                                     class="btn btn-success">Si</button>
