@@ -27,3 +27,5 @@ Route::put('/alumnos/editar/{id}', 'AlumnoController@update')->name('alumnos.upd
 
 Route::delete('/alumnos/eliminar/{id}', 'AlumnoController@destroy')->name('alumnos.eliminar');
 
+Route::get('/fichas/lista/{id}', 'FichaController@index')->name('fichas.lista');
+

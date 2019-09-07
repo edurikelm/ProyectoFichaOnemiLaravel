@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="/alumnos/create" class="btn btn-success btn-sm">Nuevo Alumno</a>
-            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de Alumnos </h4>
+            <a href="/alumnos/create" class="btn btn-primary btn-sm">Nueva Entrevista</a>
+            <h4 class="m-0 font-weight-bold text-primary text-center">Lista de entrevistas del alumno: {{$nombreAlumno->nombres}} </h4>
         </div>
         <div class="card-body">
             @if ( session('mensaje') )
@@ -20,31 +21,31 @@
                     <thead class="thead-light">
                         <tr>
                             <th>#</th>
-                            <th>Rut</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
-                            <th>Curso</th>
-                            <th>Fichas</th>
+                            <th>Fecha</th>
+                            <th>Situación Actual</th>
+                            <th>Entrevistador/es</th>
+                            <th>Entrevistado/a</th>
+                            <th>Detalle</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($alumnos as $item)
+                        @foreach ($fichasAlumno as $item)
                         <tr>
                             <th scope="row">
                                 {{ $item->id }}
                             </th>
                             <th>
-                                {{ $item->rut }}
+                                {{ $item->created_at }}
                             </th>
                             <th>
-                                {{ $item->nombres }}
+                                {{ $item->situacion_actual }}
                             </th>
                             <th>
-                                {{ $item->apellidos }}
+                                {{ $item->entrevistador }}
                             </th>
                             <th>
-                                {{ $item->curso }}
+                                {{ $item->entrevistado }}
                             </th>
                             <th>
                                 <a href="{{route('fichas.lista', $item)}}" class="btn btn-sm btn-primary">Ver fichas</a>
@@ -98,4 +99,5 @@
         </div>
     </div>
 </div>
+
 @endsection
