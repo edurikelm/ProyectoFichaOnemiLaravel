@@ -13,6 +13,12 @@ class FichaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index($id)
     {
         $fichasAlumno = Ficha::where('alumno_id', $id)->paginate(5);
@@ -27,7 +33,7 @@ class FichaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -38,7 +44,22 @@ class FichaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ficha = new Ficha();
+        $ficha->alumno_id = $request->alumno_id;
+        $ficha->user_id = $request->user_id;
+        
+        $ficha->entrevistador = $request->nombre1;
+        $ficha->otro_entrevistador = $request->otro;
+        $ficha->entrevistado = $request->entrevistado;
+        $ficha->situacion_actual = $request->actual;
+        $ficha->motivo = $request->motivo;
+        $ficha->acuerdos = $request->acuerdos;
+        $ficha->observaciones = $request->obs;
+        $ficha->fecha_entrevista = $request->fecha;
+        $ficha->hora_entrevista = $request->hora;
+        $ficha->save();
+
+        return back()->with('mensaje', 'Ficha Agregada!');
     }
 
     /**
@@ -83,6 +104,10 @@ class FichaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fichaEliminar = Ficha::findOrFail($id);
+        $fichaEliminar->delete();
+
+        return back()->with('mensaje', 'Ficha eliminada con exito.');
+
     }
 }

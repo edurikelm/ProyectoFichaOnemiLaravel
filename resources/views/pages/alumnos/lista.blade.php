@@ -53,9 +53,9 @@
                                 <a href="" class="btn btn-sm btn-info">Ver</a>
                                 <a href="{{route('alumnos.editar', $item)}}" class="btn btn-sm btn-warning">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger" data-toggle="modal"
-                                    data-target="#myModal">Eliminar</a>
+                                    data-target="#myModal{{$item->id}}">Eliminar</a>
                             </th>
-                            <div id="myModal" class="modal fade" role="dialog">
+                            <div id="myModal{{$item->id}}" class="modal fade" role="dialog">
                                 <div class="modal-dialog modal-lg">
                                     <!-- Contenido del modal -->
                                     <div class="modal-content">
@@ -78,7 +78,7 @@
                                             <form action="{{route('alumnos.eliminar', $item)}}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
-                                                <input type="hidden" name="id" value="">
+                                                <input type="" name="id" value="{{$item}}">
                                                 <button type="submit" name="btn_borrar_alumno"
                                                     class="btn btn-success">Si</button>
                                                 <button type="button" class="btn btn-danger"

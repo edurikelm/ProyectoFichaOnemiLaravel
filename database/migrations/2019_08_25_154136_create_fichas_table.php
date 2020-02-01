@@ -15,9 +15,9 @@ class CreateFichasTable extends Migration
     {
         Schema::create('fichas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedInteger('alumno_id');
-            $table->text('usuario');
-            $table->integer('numFicha');
+            $table->unsignedBigInteger('alumno_id');
+            $table->unsignedBigInteger('user_id');
+            $table->integer('numFicha')->nullable();
             $table->timestamp('fecha')->nullable();
             $table->string('entrevistador');
             $table->string('otro_entrevistador');
@@ -30,6 +30,13 @@ class CreateFichasTable extends Migration
             $table->time('hora_entrevista')->nullable();
 
             $table->timestamps();
+
+            //Relacion
+            $table->foreign('alumno_id')->references('id')->on('alumnos')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

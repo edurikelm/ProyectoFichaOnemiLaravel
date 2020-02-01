@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Alumnos
 Route::resource('/alumnos', 'AlumnoController');
 
 Route::get('/alumnos/editar/{id}', 'AlumnoController@edit')->name('alumnos.editar');
@@ -27,5 +28,11 @@ Route::put('/alumnos/editar/{id}', 'AlumnoController@update')->name('alumnos.upd
 
 Route::delete('/alumnos/eliminar/{id}', 'AlumnoController@destroy')->name('alumnos.eliminar');
 
+//Fichas
+Route::resource('/fichas', 'FichaController');
+
 Route::get('/fichas/lista/{id}', 'FichaController@index')->name('fichas.lista');
+
+Route::delete('/fichas/eliminar/{id}', 'FichaController@destroy')->name('fichas.eliminar');
+
 

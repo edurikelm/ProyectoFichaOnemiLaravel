@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Alumno;
 use App\Ficha;
+use App\User;
 use Carbon\Carbon;
 
 class AlumnosTableSeeder extends Seeder
@@ -14,10 +15,13 @@ class AlumnosTableSeeder extends Seeder
      */
     public function run()
     { 
-        Alumno::truncate(); // Evita duplicar datos
+
+        factory(User::class, 3)->create();
+
+        // Alumno::truncate(); // Evita duplicar datos
 
         $alumno = new Alumno();
-        $alumno->nombres = "Eduardo Albert";
+        $alumno->nombres = "Eduardo Alberto";
         $alumno->apellidos = "Riquelme Mayorga";
         $alumno->rut = "16.975.255-9";
         $alumno->direccion = "Jose Muñoz Hermosilla 252";
@@ -54,12 +58,12 @@ class AlumnosTableSeeder extends Seeder
         $alumno->diagnostico = "Diagnostico 2";
         $alumno->save();
 
-        Ficha::truncate();
+        // Ficha::truncate();
 
         $ficha = new Ficha();
-        $ficha->usuario = 'Eduardo Riquelme';
         $ficha->numFicha = 1;
         $ficha->alumno_id = 1;
+        $ficha->user_id = 1;
         $ficha->entrevistador = 'Gladys Mayorga';
         $ficha->otro_entrevistador = 'Victor Riquelme';
         $ficha->entrevistado = 'Madre';
@@ -69,6 +73,23 @@ class AlumnosTableSeeder extends Seeder
         Se aborda derivación como acompañamiento a proceso de adaptación (por ser estudiante extranjero)';
         $ficha->observaciones = 'Se solicita compartir información con profesora Rosario. ';
         $ficha->fecha_entrevista = '2019-11-03';
+        $ficha->save();
+
+        $ficha = new Ficha();
+        $ficha->numFicha = 2;
+        $ficha->alumno_id = 1;
+        $ficha->user_id = 3;
+        $ficha->entrevistador = 'Gladys Mayorga';
+        $ficha->otro_entrevistador = '';
+        $ficha->entrevistado = 'Sandra Daza';
+        $ficha->situacion_actual = 'Seguimiento';
+        $ficha->motivo = 'Intervención psicológica/ Derivación a psicóloga ';
+        $ficha->acuerdos = 'Se aborda necesidad de madre de tener orientaciones sobre manejo de identidad de género y orientación sexual de su hijo. Se entrega información sobre estas situaciones y orientaciones sobre a quienes acudir o informar situaciones de discriminación (si ocurrieran).
+        Se acuerda realizar próxima entrevista en un mes, mientras se trabaja en vínculo con estudiante. ';
+        $ficha->observaciones = 'Durante mes de mayo no se pudo citar a apoderada, ni a estudiante por contingencias. No se han reportado a psicóloga dificultades en inclusión de estudiante en establecimiento. 
+        Pendiente: continuar proceso de vinculación con estudiante y abordar tema de orientación sexual. 
+        Pendiente: citar a apoderada. ';
+        $ficha->fecha_entrevista = '2019-05-03';
         $ficha->save();
 
 
