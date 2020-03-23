@@ -33,6 +33,15 @@ Route::resource('/fichas', 'FichaController');
 
 Route::get('/fichas/lista/{id}', 'FichaController@index')->name('fichas.lista');
 
+Route::get('/fichas/editar/{id}', 'FichaController@edit')->name('fichas.editar');
+
+Route::put('/fichas/editar/{id}', 'FichaController@update')->name('fichas.update');
+
+// Route::get('/fichas/lista/{id}', 'FichaController@edit');
+
 Route::delete('/fichas/eliminar/{id}', 'FichaController@destroy')->name('fichas.eliminar');
+
+//PDF
+Route::name('imprimir')->get('/imprimir-pdf/{id}', 'Controller@imprimirPdf');
 
 

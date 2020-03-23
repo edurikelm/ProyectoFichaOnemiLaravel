@@ -23,7 +23,10 @@ class FichaController extends Controller
     {
         $fichasAlumno = Ficha::where('alumno_id', $id)->paginate(5);
         $nombreAlumno = Alumno::findOrFail($id);
-        return view('pages.fichas.lista', compact('fichasAlumno','nombreAlumno'));
+        //Se obtiene y guarda el ultimo registro de la columna numFicha
+        $numFicha = Ficha::where('alumno_id', $id)->orderby('numFicha','DESC')->first();
+        
+        return view('pages.fichas.lista', compact('fichasAlumno','nombreAlumno','numFicha'));
     }
 
     /**
@@ -47,7 +50,7 @@ class FichaController extends Controller
         $ficha = new Ficha();
         $ficha->alumno_id = $request->alumno_id;
         $ficha->user_id = $request->user_id;
-        
+        $ficha->numFicha = $request->numFicha;
         $ficha->entrevistador = $request->nombre1;
         $ficha->otro_entrevistador = $request->otro;
         $ficha->entrevistado = $request->entrevistado;
@@ -81,7 +84,9 @@ class FichaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ficha = Ficha::findOrFail($id);
+        return view('pages.fichas.editar', compact('ficha'));
+
     }
 
     /**
@@ -93,7 +98,24 @@ class FichaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fichaUpdate = ficha::find($id);
+        $fichaUpdate->alumno_id = $request->alumno_id;
+        $fichaUpdate->user_id = $request->user_id;
+        $fichaUpdate->numFicha = $request->numFicha;
+        $fichaUpdate->entrevistador = $request->nombre1;
+        $fichaUpdate->otro_entrevistador = $request->otro;
+        $fichaUpdate->entrevistado = $request->entrevistado;
+        $fichaUpdate->situacion_actual = $request->actual;
+        $fichaUpdate->motivo = $request->motivo;
+        $fichaUpdate->acuerdos = $request->acuerdos;
+        $fichaUpdate->observaciones = $request->obs;
+        $fichaUpdate->fecha_entrevista = $request->fecha;
+        $fichaUpdate->hora_entrevista = $request->hora;
+        $fichaUpdate->save();
+
+        return back()->with('mensaje', 'Ficha editada con exito.');
+
+
     }
 
     /**
@@ -107,7 +129,7 @@ class FichaController extends Controller
         $fichaEliminar = Ficha::findOrFail($id);
         $fichaEliminar->delete();
 
-        return back()->with('mensaje', 'Ficha eliminada con exito.');
+        return back()->with('eliminar', 'Ficha eliminada con exito.');
 
     }
 }

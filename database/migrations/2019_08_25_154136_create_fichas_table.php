@@ -17,7 +17,7 @@ class CreateFichasTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('alumno_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('numFicha')->nullable();
+            $table->integer('numFicha');
             $table->timestamp('fecha')->nullable();
             $table->string('entrevistador');
             $table->string('otro_entrevistador');

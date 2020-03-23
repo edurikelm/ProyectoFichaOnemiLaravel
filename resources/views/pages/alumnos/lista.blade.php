@@ -50,7 +50,6 @@
                                 <a href="{{route('fichas.lista', $item)}}" class="btn btn-sm btn-primary">Ver fichas</a>
                             </th>
                             <th>
-                                <a href="" class="btn btn-sm btn-info">Ver</a>
                                 <a href="{{route('alumnos.editar', $item)}}" class="btn btn-sm btn-warning">Editar</a>
                                 <a href="" class="btn btn-sm btn-danger" data-toggle="modal"
                                     data-target="#myModal{{$item->id}}">Eliminar</a>
